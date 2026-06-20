@@ -1,12 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Happy Father's Day, Ram ❤️</title>
-
-<style>
 
 <style>
 
@@ -34,24 +33,26 @@ section{
 
     opacity:0;
     transform:translateY(40px);
-    animation:fadeUp 1s ease forwards;
+    transition:all .9s ease;
 }
-
-section:nth-child(2){animation-delay:.2s;}
-section:nth-child(3){animation-delay:.4s;}
-section:nth-child(4){animation-delay:.6s;}
-section:nth-child(5){animation-delay:.8s;}
-section:nth-child(6){animation-delay:1s;}
-section:nth-child(7){animation-delay:1.2s;}
 
 .hero{
     background:linear-gradient(180deg,#0d1117,#161b22);
 }
 
-h1{
+.hero h1{
     font-size:3rem;
     margin-bottom:10px;
     animation:floatTitle 4s ease-in-out infinite;
+}
+
+.hero-subtitle{
+    max-width:850px;
+    font-size:1.25rem;
+}
+
+.cursor{
+    animation:blink 1s infinite;
 }
 
 h2{
@@ -70,7 +71,6 @@ h2{
     overflow:auto;
 
     box-shadow:0 0 20px rgba(88,166,255,.08);
-
     transition:all .4s ease;
 }
 
@@ -86,7 +86,6 @@ img{
     margin:20px 0;
 
     box-shadow:0 0 25px rgba(88,166,255,.2);
-
     transition:all .5s ease;
 }
 
@@ -104,35 +103,79 @@ img:hover{
     opacity:.75;
 }
 
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(40px);
-    }
+.glow{
+    color:#58a6ff;
+    text-shadow:0 0 15px rgba(88,166,255,.5);
+}
 
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+#scrollHint{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+
+    background:rgba(22,27,34,.96);
+    color:#58a6ff;
+
+    border:1px solid #30363d;
+    border-radius:12px;
+
+    padding:12px 18px;
+
+    font-size:14px;
+    font-weight:600;
+
+    z-index:9999;
+
+    box-shadow:0 0 20px rgba(88,166,255,.20);
+
+    animation:bounceHint 2s infinite;
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
+}
+
+#scrollHint.hide{
+    opacity:0;
+    transform:translateY(20px);
+    pointer-events:none;
+}
+
+.build-complete{
+    font-size:3rem;
+    color:#58a6ff;
+    text-shadow:0 0 25px rgba(88,166,255,.5);
 }
 
 @keyframes floatTitle{
-    0%{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-8px);}
+    100%{transform:translateY(0);}
+}
+
+@keyframes blink{
+    50%{
+        opacity:0;
+    }
+}
+
+@keyframes bounceHint{
+    0%,20%,50%,80%,100%{
         transform:translateY(0);
     }
 
-    50%{
+    40%{
         transform:translateY(-8px);
     }
 
-    100%{
-        transform:translateY(0);
+    60%{
+        transform:translateY(-4px);
     }
 }
 
 @media (max-width:768px){
 
-    h1{
+    .hero h1{
         font-size:2.1rem;
     }
 
@@ -143,21 +186,30 @@ img:hover{
     .code{
         font-size:.9rem;
     }
+
+    .build-complete{
+        font-size:2rem;
+    }
 }
 
-</style></style>
+</style>
+
 </head>
 
 <body>
 
+<div id="scrollHint">
+    Compilation 0% complete ↓
+</div>
+
 <section class="hero">
 
-<h1>Happy Father's Day, Ram ❤️</h1>
+<h1 id="typingTitle"></h1>
 
-<p class="quote">
+<p class="hero-subtitle">
 Some heroes wear capes.<br>
 Some write code.<br>
-Ram somehow does both while being an amazing dad.
+<span class="glow">Ram somehow does both while being an amazing dad.</span>
 </p>
 
 <div class="code">
@@ -165,16 +217,16 @@ Ram somehow does both while being an amazing dad.
 // Father's Day Build v1.0
 
 const Ram = {
-    role: "Dad",
-    skills: ["Coding", "Problem Solving", "Making Kids Smile"],
-    patience: Infinity,
-    love: Infinity
+role: "Dad",
+skills: ["Coding", "Problem Solving", "Making Kids Smile"],
+patience: Infinity,
+love: Infinity
 };
 
 while(true){
-    love++;
-}
-</pre>
+love++;
+} </pre>
+
 </div>
 
 </section>
@@ -242,20 +294,20 @@ function DadLove() {
 }
 
 function Distance() {
-    return Temporary;
+return Temporary;
 }
 
 if (DadLove() > Distance()) {
-    DadLoveWins = true;
-}
-</pre>
+DadLoveWins = true;
+} </pre>
+
 </div>
 
 </section>
 
 <section>
 
-<h2>Final Message</h2>
+<h2>System Report</h2>
 
 <div class="code">
 <pre>
@@ -265,8 +317,8 @@ Dad: Present
 Love: Active
 Memories: Preserved
 Hope: Loading...
-Future Adventures: Pending
-</pre>
+Future Adventures: Pending </pre>
+
 </div>
 
 <p class="quote">
@@ -278,11 +330,23 @@ Circumstances change.
 
 But being a father never changes.
 
-You are loved.
-You are remembered.
-You matter.
+</p>
+
+</section>
+
+<section>
+
+<div class="build-complete">
+BUILD COMPLETE ❤️
+</div>
+
+<p class="quote">
+You are loved.<br>
+You are remembered.<br>
+You matter.<br><br>
 
 Happy Father's Day, Ram.
+
 </p>
 
 <p class="small">
@@ -290,6 +354,83 @@ Made with ❤️, memories, and a little bit of code.
 </p>
 
 </section>
+
+<script>
+
+/* Typing effect */
+
+const titleText = "Happy Father's Day, Ram ❤️";
+const titleElement = document.getElementById("typingTitle");
+
+let i = 0;
+
+function typeTitle(){
+
+    if(i < titleText.length){
+
+        titleElement.innerHTML += titleText.charAt(i);
+        i++;
+
+        setTimeout(typeTitle, 90);
+    }
+}
+
+typeTitle();
+
+/* Reveal sections */
+
+const observer = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+        }
+
+    });
+
+},{threshold:0.15});
+
+document.querySelectorAll("section").forEach(section => {
+    observer.observe(section);
+});
+
+/* Dynamic compilation progress */
+
+const hint = document.getElementById("scrollHint");
+
+window.addEventListener("scroll", () => {
+
+    const scrollTop = window.scrollY;
+
+    const docHeight =
+        document.documentElement.scrollHeight -
+        window.innerHeight;
+
+    const progress =
+        Math.min(
+            100,
+            Math.round((scrollTop / docHeight) * 100)
+        );
+
+    hint.innerHTML =
+        "Compilation " + progress + "% complete ↓";
+
+    if(progress >= 98){
+
+        hint.classList.add("hide");
+
+    }else{
+
+        hint.classList.remove("hide");
+
+    }
+
+});
+
+</script>
 
 </body>
 </html>
