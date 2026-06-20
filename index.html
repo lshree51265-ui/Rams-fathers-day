@@ -1,436 +1,829 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Happy Father's Day, Ram ❤️</title>
-
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
-
-html{
-    scroll-behavior:smooth;
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --blue:#58a6ff;
+  --blue-dim:rgba(88,166,255,0.12);
+  --blue-glow:rgba(88,166,255,0.25);
+  --green:#3fb950;
+  --purple:#bc8cff;
+  --orange:#f78166;
+  --bg:#0d1117;
+  --bg2:#161b22;
+  --bg3:#1c2128;
+  --border:#30363d;
+  --text:#e6edf3;
+  --muted:#8b949e;
 }
-
+html{scroll-behavior:smooth;}
 body{
-    margin:0;
-    background:#0d1117;
-    color:#e6edf3;
-    font-family:Consolas, Monaco, monospace;
-    line-height:1.8;
-    overflow-x:hidden;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+  line-height:1.7;
 }
 
+/* Stars background */
+#stars{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+.star{
+  position:absolute;
+  border-radius:50%;
+  background:#fff;
+  animation:twinkle var(--d,3s) ease-in-out infinite var(--delay,0s);
+  opacity:0;
+}
+@keyframes twinkle{
+  0%,100%{opacity:0;}
+  50%{opacity:var(--op,0.6);}
+}
+
+/* Floating particles */
+#particles{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+.particle{
+  position:absolute;
+  border-radius:50%;
+  background:var(--blue);
+  opacity:0;
+  animation:floatUp var(--dur,8s) ease-in infinite var(--delay,0s);
+}
+@keyframes floatUp{
+  0%{opacity:0;transform:translateY(0) scale(1);}
+  10%{opacity:0.4;}
+  90%{opacity:0.1;}
+  100%{opacity:0;transform:translateY(-100vh) scale(0.3);}
+}
+
+/* Grid overlay */
+.grid-bg{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background-image:
+    linear-gradient(rgba(88,166,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(88,166,255,0.03) 1px, transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;
+}
+
+/* Sections */
 section{
-    min-height:100vh;
-    padding:60px 20px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-
-    opacity:0;
-    transform:translateY(40px);
-    transition:all .9s ease;
+  position:relative;
+  z-index:1;
+  min-height:100vh;
+  padding:80px 20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  opacity:0;
+  transform:translateY(50px);
+  transition:opacity 1s ease, transform 1s ease;
+}
+section.visible{
+  opacity:1;
+  transform:translateY(0);
 }
 
+/* HERO */
 .hero{
-    background:linear-gradient(180deg,#0d1117,#161b22);
+  background:linear-gradient(180deg, #0a0e14 0%, var(--bg) 100%);
+  padding-top:120px;
 }
-
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:100px;
+  padding:6px 16px;
+  font-size:0.8rem;
+  color:var(--muted);
+  margin-bottom:32px;
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:0.05em;
+}
+.hero-badge .dot{
+  width:7px;height:7px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 8px var(--green);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1);opacity:1;}
+  50%{transform:scale(1.4);opacity:0.6;}
+}
 .hero h1{
-    font-size:3rem;
-    margin-bottom:10px;
-    animation:floatTitle 4s ease-in-out infinite;
+  font-size:clamp(2.4rem,6vw,4.5rem);
+  font-weight:900;
+  line-height:1.1;
+  letter-spacing:-0.02em;
+  margin-bottom:24px;
+  background:linear-gradient(135deg, #ffffff 0%, var(--blue) 50%, var(--purple) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  min-height:1.2em;
+}
+.hero-sub{
+  font-size:clamp(1rem,2.5vw,1.3rem);
+  color:var(--muted);
+  max-width:700px;
+  margin-bottom:48px;
+  line-height:1.8;
+}
+.hero-sub .highlight{
+  color:var(--text);
+  font-weight:600;
+}
+.scroll-cta{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  color:var(--muted);
+  font-size:0.8rem;
+  font-family:'JetBrains Mono',monospace;
+  animation:fadeInUp 1s ease 2s both;
+}
+.scroll-arrow{
+  width:24px;height:24px;
+  border-right:2px solid var(--blue);
+  border-bottom:2px solid var(--blue);
+  transform:rotate(45deg);
+  animation:bounceArrow 2s ease-in-out infinite;
+  margin-top:4px;
+}
+@keyframes bounceArrow{
+  0%,100%{transform:rotate(45deg) translate(0,0);opacity:0.5;}
+  50%{transform:rotate(45deg) translate(4px,4px);opacity:1;}
+}
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
-.hero-subtitle{
-    max-width:850px;
-    font-size:1.25rem;
+/* Code blocks */
+.code-window{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:16px;
+  max-width:820px;
+  width:95%;
+  overflow:hidden;
+  box-shadow:0 0 60px rgba(88,166,255,0.07), 0 20px 60px rgba(0,0,0,0.4);
+  transition:transform 0.4s ease, box-shadow 0.4s ease;
+  margin:24px 0;
 }
-
-.cursor{
-    animation:blink 1s infinite;
+.code-window:hover{
+  transform:translateY(-6px);
+  box-shadow:0 0 80px rgba(88,166,255,0.15), 0 30px 80px rgba(0,0,0,0.5);
 }
+.window-bar{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:14px 18px;
+  border-bottom:1px solid var(--border);
+  background:var(--bg3);
+}
+.dot-r{width:12px;height:12px;border-radius:50%;background:#ff5f57;}
+.dot-y{width:12px;height:12px;border-radius:50%;background:#febc2e;}
+.dot-g{width:12px;height:12px;border-radius:50%;background:#28c840;}
+.window-title{
+  margin-left:auto;margin-right:auto;
+  font-size:0.75rem;
+  color:var(--muted);
+  font-family:'JetBrains Mono',monospace;
+}
+.code-body{
+  padding:24px 28px;
+  text-align:left;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.9rem;
+  line-height:1.9;
+  overflow-x:auto;
+}
+.ln{color:#3d444d;user-select:none;display:inline-block;width:24px;margin-right:16px;text-align:right;}
+.c-comment{color:#6e7681;}
+.c-keyword{color:var(--purple);}
+.c-string{color:#a5d6ff;}
+.c-number{color:var(--orange);}
+.c-fn{color:#d2a8ff;}
+.c-var{color:var(--blue);}
+.c-prop{color:#79c0ff;}
+.c-val{color:var(--green);}
+.c-op{color:var(--orange);}
 
+/* Section headings */
+.section-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.75rem;
+  letter-spacing:0.15em;
+  color:var(--blue);
+  text-transform:uppercase;
+  margin-bottom:12px;
+  opacity:0.8;
+}
 h2{
-    color:#58a6ff;
-    margin-bottom:20px;
+  font-size:clamp(1.8rem,4vw,3rem);
+  font-weight:800;
+  letter-spacing:-0.02em;
+  margin-bottom:20px;
+  color:var(--text);
+}
+h2 .accent{color:var(--blue);}
+
+/* Memory cards */
+.memory-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  max-width:720px;
+  width:95%;
+  margin:24px 0;
+  transition:transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow:0 10px 40px rgba(0,0,0,0.3);
+}
+.memory-card:hover{
+  transform:translateY(-8px) scale(1.01);
+  box-shadow:0 20px 60px rgba(88,166,255,0.12), 0 10px 40px rgba(0,0,0,0.4);
+}
+.memory-card img{
+  width:100%;
+  height:380px;
+  object-fit:cover;
+  display:block;
+  border-bottom:1px solid var(--border);
+  transition:transform 0.6s ease;
+}
+.memory-card:hover img{
+  transform:scale(1.04);
+}
+.memory-caption{
+  padding:24px 28px;
+  text-align:left;
+}
+.memory-tag{
+  display:inline-block;
+  background:var(--blue-dim);
+  color:var(--blue);
+  border:1px solid rgba(88,166,255,0.2);
+  border-radius:100px;
+  padding:4px 14px;
+  font-size:0.75rem;
+  font-family:'JetBrains Mono',monospace;
+  margin-bottom:12px;
+}
+.memory-caption p{
+  color:var(--muted);
+  font-size:1rem;
+  line-height:1.7;
 }
 
-.code{
-    background:#161b22;
-    border:1px solid #30363d;
-    border-radius:12px;
-    padding:20px;
-    max-width:800px;
-    width:90%;
-    text-align:left;
-    overflow:auto;
-
-    box-shadow:0 0 20px rgba(88,166,255,.08);
-    transition:all .4s ease;
+/* Quote blocks */
+.quote-block{
+  max-width:700px;
+  border-left:3px solid var(--blue);
+  padding:16px 24px;
+  margin:20px 0;
+  text-align:left;
+  background:var(--blue-dim);
+  border-radius:0 12px 12px 0;
+}
+.quote-block p{
+  font-size:1.1rem;
+  color:var(--text);
+  line-height:1.8;
+  font-style:italic;
 }
 
-.code:hover{
-    transform:translateY(-4px);
-    box-shadow:0 0 35px rgba(88,166,255,.2);
+/* Stats row */
+.stats-row{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin:32px 0;
+}
+.stat-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:24px 32px;
+  min-width:160px;
+  transition:transform 0.3s, box-shadow 0.3s;
+}
+.stat-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 0 30px rgba(88,166,255,0.1);
+}
+.stat-number{
+  font-size:2.5rem;
+  font-weight:900;
+  font-family:'JetBrains Mono',monospace;
+  color:var(--blue);
+  display:block;
+  line-height:1;
+  margin-bottom:6px;
+}
+.stat-label{
+  font-size:0.8rem;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:0.1em;
 }
 
-img{
-    max-width:90%;
-    width:650px;
-    border-radius:14px;
-    margin:20px 0;
+/* Terminal */
+.terminal{
+  background:#0a0c10;
+  border:1px solid var(--border);
+  border-radius:16px;
+  max-width:720px;
+  width:95%;
+  overflow:hidden;
+  font-family:'JetBrains Mono',monospace;
+  box-shadow:0 0 50px rgba(0,0,0,0.5);
+}
+.terminal-bar{
+  background:#1a1f27;
+  padding:12px 18px;
+  display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid var(--border);
+}
+.terminal-body{
+  padding:24px 28px;
+  font-size:0.88rem;
+  line-height:2;
+  text-align:left;
+}
+.t-prompt{color:var(--green);}
+.t-cmd{color:var(--text);}
+.t-out{color:var(--muted);}
+.t-success{color:var(--green);}
+.t-info{color:var(--blue);}
+.t-warn{color:#f0883e;}
 
-    box-shadow:0 0 25px rgba(88,166,255,.2);
-    transition:all .5s ease;
+/* Divider */
+.divider{
+  width:80px;height:2px;
+  background:linear-gradient(90deg,transparent,var(--blue),transparent);
+  margin:0 auto 40px;
+  border-radius:2px;
 }
 
-img:hover{
-    transform:scale(1.03);
-    box-shadow:0 0 45px rgba(88,166,255,.35);
+/* Final section */
+.final-glow{
+  font-size:clamp(2rem,6vw,4rem);
+  font-weight:900;
+  letter-spacing:-0.02em;
+  background:linear-gradient(135deg, var(--blue) 0%, var(--purple) 50%, var(--blue) 100%);
+  background-size:200%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:shimmer 4s linear infinite;
+  margin-bottom:24px;
+}
+@keyframes shimmer{
+  0%{background-position:0% center;}
+  100%{background-position:200% center;}
+}
+.love-note{
+  max-width:600px;
+  font-size:1.2rem;
+  color:var(--muted);
+  line-height:1.9;
+  margin-bottom:40px;
+}
+.love-note strong{color:var(--text);}
+.made-with{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.78rem;
+  color:var(--muted);
+  letter-spacing:0.05em;
 }
 
-.quote{
-    font-size:1.3rem;
-    max-width:850px;
+/* Compilation popup */
+#compile-popup{
+  position:fixed;
+  bottom:24px;
+  right:24px;
+  z-index:9999;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:0;
+  width:220px;
+  box-shadow:0 8px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(88,166,255,0.08);
+  transition:opacity 0.5s ease, transform 0.5s ease;
+  overflow:hidden;
+}
+#compile-popup.hide{
+  opacity:0;
+  transform:translateY(16px);
+  pointer-events:none;
+}
+.popup-header{
+  padding:12px 16px 8px;
+  display:flex;align-items:center;gap:8px;
+}
+.popup-icon{
+  width:8px;height:8px;border-radius:50%;background:var(--blue);
+  box-shadow:0 0 8px var(--blue);
+  animation:pulse 2s infinite;
+  flex-shrink:0;
+}
+.popup-title{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.72rem;
+  color:var(--muted);
+  letter-spacing:0.05em;
+}
+.popup-pct{
+  font-family:'JetBrains Mono',monospace;
+  font-size:1.6rem;
+  font-weight:700;
+  color:var(--blue);
+  padding:0 16px 4px;
+  line-height:1;
+}
+.popup-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.7rem;
+  color:var(--muted);
+  padding:0 16px 10px;
+}
+.popup-bar-wrap{
+  padding:0 16px 14px;
+}
+.popup-bar-track{
+  height:4px;
+  background:var(--border);
+  border-radius:100px;
+  overflow:hidden;
+}
+.popup-bar-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--blue),var(--purple));
+  border-radius:100px;
+  width:0%;
+  transition:width 0.3s ease;
+  box-shadow:0 0 8px rgba(88,166,255,0.5);
 }
 
-.small{
-    opacity:.75;
+/* Heartbeat line SVG */
+.heartbeat-wrap{
+  width:100%;max-width:700px;
+  margin:20px 0;
+  opacity:0.6;
 }
+.heartbeat-wrap svg{stroke-dasharray:1000;stroke-dashoffset:1000;animation:drawLine 3s ease forwards;}
+@keyframes drawLine{to{stroke-dashoffset:0;}}
 
-.glow{
-    color:#58a6ff;
-    text-shadow:0 0 15px rgba(88,166,255,.5);
+/* Responsive */
+@media(max-width:768px){
+  .stats-row{gap:12px;}
+  .stat-card{min-width:130px;padding:18px 20px;}
+  .memory-card img{height:240px;}
+  .code-body{font-size:0.78rem;padding:18px;}
+  #compile-popup{width:180px;bottom:16px;right:16px;}
 }
-
-#scrollHint{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-
-    background:rgba(22,27,34,.96);
-    color:#58a6ff;
-
-    border:1px solid #30363d;
-    border-radius:12px;
-
-    padding:12px 18px;
-
-    font-size:14px;
-    font-weight:600;
-
-    z-index:9999;
-
-    box-shadow:0 0 20px rgba(88,166,255,.20);
-
-    animation:bounceHint 2s infinite;
-
-    transition:
-        opacity .5s ease,
-        transform .5s ease;
-}
-
-#scrollHint.hide{
-    opacity:0;
-    transform:translateY(20px);
-    pointer-events:none;
-}
-
-.build-complete{
-    font-size:3rem;
-    color:#58a6ff;
-    text-shadow:0 0 25px rgba(88,166,255,.5);
-}
-
-@keyframes floatTitle{
-    0%{transform:translateY(0);}
-    50%{transform:translateY(-8px);}
-    100%{transform:translateY(0);}
-}
-
-@keyframes blink{
-    50%{
-        opacity:0;
-    }
-}
-
-@keyframes bounceHint{
-    0%,20%,50%,80%,100%{
-        transform:translateY(0);
-    }
-
-    40%{
-        transform:translateY(-8px);
-    }
-
-    60%{
-        transform:translateY(-4px);
-    }
-}
-
-@media (max-width:768px){
-
-    .hero h1{
-        font-size:2.1rem;
-    }
-
-    .quote{
-        font-size:1.05rem;
-    }
-
-    .code{
-        font-size:.9rem;
-    }
-
-    .build-complete{
-        font-size:2rem;
-    }
-}
-
 </style>
-
 </head>
-
 <body>
 
-<div id="scrollHint">
-    Compilation 0% complete ↓
+<!-- Ambient -->
+<div id="stars"></div>
+<div id="particles"></div>
+<div class="grid-bg"></div>
+
+<!-- Compilation Popup -->
+<div id="compile-popup">
+  <div class="popup-header">
+    <div class="popup-icon"></div>
+    <div class="popup-title">COMPILING...</div>
+  </div>
+  <div class="popup-pct" id="popup-pct">0%</div>
+  <div class="popup-label" id="popup-label">Compilation 0% complete</div>
+  <div class="popup-bar-wrap">
+    <div class="popup-bar-track">
+      <div class="popup-bar-fill" id="popup-bar"></div>
+    </div>
+  </div>
 </div>
 
+<!-- HERO -->
 <section class="hero">
+  <div class="hero-badge">
+    <span class="dot"></span>
+    <span>father.exe — running</span>
+  </div>
+  <h1 id="typingTitle"></h1>
+  <p class="hero-sub">
+    <span class="highlight">To the most Exceptional dad.</span>
+  </p>
 
-<h1 id="typingTitle"></h1>
+  <div class="code-window">
+    <div class="window-bar">
+      <div class="dot-r"></div>
+      <div class="dot-y"></div>
+      <div class="dot-g"></div>
+      <div class="window-title">dad.config.ts</div>
+    </div>
+    <div class="code-body">
+      <div><span class="ln">1</span><span class="c-comment">// Father's Day Build · v2025.06.15</span></div>
+      <div><span class="ln">2</span></div>
+      <div><span class="ln">3</span><span class="c-keyword">const </span><span class="c-var">Ram</span><span class="c-op"> = </span><span class="c-op">{</span></div>
+      <div><span class="ln">4</span>&nbsp;&nbsp;<span class="c-prop">role</span><span class="c-op">: </span><span class="c-string">"Dad"</span><span class="c-op">,</span></div>
+      <div><span class="ln">5</span>&nbsp;&nbsp;<span class="c-prop">skills</span><span class="c-op">: </span><span class="c-op">[</span><span class="c-string">"Coding"</span><span class="c-op">, </span><span class="c-string">"Problem Solving"</span><span class="c-op">, </span><span class="c-string">"Making Kids Smile"</span><span class="c-op">],</span></div>
+      <div><span class="ln">6</span>&nbsp;&nbsp;<span class="c-prop">patience</span><span class="c-op">: </span><span class="c-val">Infinity</span><span class="c-op">,</span></div>
+      <div><span class="ln">7</span>&nbsp;&nbsp;<span class="c-prop">love</span><span class="c-op">: </span><span class="c-val">Infinity</span><span class="c-op">,</span></div>
+      <div><span class="ln">8</span>&nbsp;&nbsp;<span class="c-prop">isAlwaysAvailable</span><span class="c-op">: </span><span class="c-val">true</span></div>
+      <div><span class="ln">9</span><span class="c-op">};</span></div>
+      <div><span class="ln">10</span></div>
+      <div><span class="ln">11</span><span class="c-keyword">while </span><span class="c-op">(</span><span class="c-val">true</span><span class="c-op">) {</span></div>
+      <div><span class="ln">12</span>&nbsp;&nbsp;<span class="c-var">Ram</span><span class="c-op">.</span><span class="c-prop">love</span><span class="c-op">++; </span><span class="c-comment">// Always overflows</span></div>
+      <div><span class="ln">13</span><span class="c-op">}</span></div>
+    </div>
+  </div>
 
-<p class="hero-subtitle">
-Some heroes wear capes.<br>
-Some write code.<br>
-<span class="glow">Ram somehow does both while being an amazing dad.</span>
-</p>
-
-<div class="code">
-<pre>
-// Father's Day Build v1.0
-
-const Ram = {
-role: "Dad",
-skills: ["Coding", "Problem Solving", "Making Kids Smile"],
-patience: Infinity,
-love: Infinity
-};
-
-while(true){
-love++;
-} </pre>
-
-</div>
-
+  <div class="scroll-cta">
+    <span>scroll to compile</span>
+    <div class="scroll-arrow"></div>
+  </div>
 </section>
 
+<!-- MEMORY 1 -->
 <section>
-
-<h2>Memory #1 📸</h2>
-
-<img src="photo1.jpg" alt="Memory 1">
-
-<p class="quote">
-Every family has a few photos that instantly make people smile.
-This is definitely one of them.
-</p>
-
+  <h2>Your love doesn't <span class="accent">fade</span> with distance — it stays, always 📸</h2>
+  <div class="divider"></div>
+  <div class="memory-card">
+    <img src="photo1.jpg" alt="Memory 1">
+    <div class="memory-caption">
+      <span class="memory-tag">snapshot · 001</span>
+      <p>Their first home was in your arms; their forever home is in your heart. Through sleepless nights, tiny milestones, and every challenge that came with them, you gave them all the love, strength, and care a Dad could give. Time and circumstances may change many things, but they can never erase the memories, sacrifices, and deep bond shared between you and your Kids.</p>
+    </div>
+  </div>
 </section>
 
+<!-- MEMORY 2 -->
 <section>
-
-<h2>Memory #2 😄</h2>
-
-<img src="photo2.jpg" alt="Memory 2">
-
-<p class="quote">
-Evidence that even the world's toughest debugging sessions
-are easier than keeping kids from doing something hilarious.
-</p>
-
+  <h2>Always their dad, always <span class="accent">close</span> in heart 😄</h2>
+  <div class="divider"></div>
+  <div class="memory-card">
+    <img src="photo2.jpg" alt="Memory 2">
+    <div class="memory-caption">
+      <span class="memory-tag">snapshot · 002</span>
+      <p>Though miles may separate you, your love hugs them every day.</p>
+    </div>
+  </div>
 </section>
 
+<!-- MEMORY 3 -->
 <section>
-
-<h2>Memory #3 ❤️</h2>
-
-<img src="photo3.jpg" alt="Memory 3">
-
-<p class="quote">
-The best moments are rarely planned.
-They're simply lived.
-</p>
-
+  <h2>Not connected by blood, still <span class="accent">chosen</span> by Heart ❤️</h2>
+  <div class="divider"></div>
+  <div class="memory-card">
+    <img src="photo3.jpg" alt="Memory 3">
+    <div class="memory-caption">
+      <span class="memory-tag">snapshot · 003</span>
+      <p>You may not have given her life, but you gave her life a whole new meaning. Fatherhood is not defined by blood, but by the countless moments of care, sacrifice, guidance, and unconditional love you give her. She may have entered your life by chance, but she became your daughter by love.</p>
+    </div>
+  </div>
 </section>
 
+<!-- MEMORY 4 -->
 <section>
-
-<h2>Memory #4 🚀</h2>
-
-<img src="photo4.jpg" alt="Memory 4">
-
-<p class="quote">
-Some memories get older.
-The feelings attached to them never do.
-</p>
-
+  <h2>Uncle by title, <span class="accent">protector</span> by heart 🚀</h2>
+  <div class="divider"></div>
+  <div class="memory-card">
+    <img src="photo4.jpg" alt="Memory 4">
+    <div class="memory-caption">
+      <span class="memory-tag">snapshot · 004</span>
+      <p>Some bonds don't need a reason. They just become part of your heart. You'll never outgrow being her favorite uncle. She'll never outgrow being your favorite girl.</p>
+    </div>
+  </div>
 </section>
 
+<!-- DAD LOGIC -->
 <section>
+  <div class="section-label">// dad_logic.exe</div>
+  <h2>Dad <span class="accent">Logic</span>.exe</h2>
+  <div class="divider"></div>
 
-<h2>Dad Logic.exe</h2>
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-number">∞</span>
+      <span class="stat-label">Love Units</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">0</span>
+      <span class="stat-label">Bugs in heart</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">100%</span>
+      <span class="stat-label">Uptime</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">∞</span>
+      <span class="stat-label">Patience.js</span>
+    </div>
+  </div>
 
-<div class="code">
-<pre>
-function DadLove() {
-    return Infinity;
-}
-
-function Distance() {
-return Temporary;
-}
-
-if (DadLove() > Distance()) {
-DadLoveWins = true;
-} </pre>
-
-</div>
-
+  <div class="code-window">
+    <div class="window-bar">
+      <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+      <div class="window-title">dad_logic.js</div>
+    </div>
+    <div class="code-body">
+      <div><span class="ln">1</span><span class="c-keyword">function </span><span class="c-fn">DadLove</span><span class="c-op">() {</span></div>
+      <div><span class="ln">2</span>&nbsp;&nbsp;<span class="c-keyword">return </span><span class="c-val">Infinity</span><span class="c-op">;</span></div>
+      <div><span class="ln">3</span><span class="c-op">}</span></div>
+      <div><span class="ln">4</span></div>
+      <div><span class="ln">5</span><span class="c-keyword">function </span><span class="c-fn">Distance</span><span class="c-op">() {</span></div>
+      <div><span class="ln">6</span>&nbsp;&nbsp;<span class="c-keyword">return </span><span class="c-string">"Temporary"</span><span class="c-op">;</span></div>
+      <div><span class="ln">7</span><span class="c-op">}</span></div>
+      <div><span class="ln">8</span></div>
+      <div><span class="ln">9</span><span class="c-keyword">const </span><span class="c-var">result</span><span class="c-op"> = </span><span class="c-fn">DadLove</span><span class="c-op">() > </span><span class="c-fn">Distance</span><span class="c-op">();</span></div>
+      <div><span class="ln">10</span><span class="c-comment">// result → true. Always.</span></div>
+    </div>
+  </div>
 </section>
 
+<!-- SYSTEM REPORT -->
 <section>
+  <div class="section-label">// system_report.log</div>
+  <h2>System <span class="accent">Report</span></h2>
+  <div class="divider"></div>
 
-<h2>System Report</h2>
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+      <span style="margin-left:auto;margin-right:auto;font-size:0.72rem;color:var(--muted);font-family:'JetBrains Mono',monospace;">bash — dad_diagnostics</span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="t-prompt">❯ </span><span class="t-cmd">run dad_diagnostics --full</span></div>
+      <div><span class="t-out">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span></div>
+      <div><span class="t-info">◉ Dad Status</span><span class="t-out">          </span><span class="t-success">✓ PRESENT</span></div>
+      <div><span class="t-info">◉ Love Module</span><span class="t-out">         </span><span class="t-success">✓ ACTIVE</span></div>
+      <div><span class="t-info">◉ Memory Cache</span><span class="t-out">        </span><span class="t-success">✓ PRESERVED</span></div>
+      <div><span class="t-info">◉ Hope Process</span><span class="t-out">        </span><span class="t-warn">⟳ LOADING...</span></div>
+      <div><span class="t-info">◉ Future Adventures</span><span class="t-out">   </span><span class="t-warn">⟳ PENDING</span></div>
+      <div><span class="t-info">◉ Heart.capacity</span><span class="t-out">      </span><span class="t-success">✓ Infinity</span></div>
+      <div><span class="t-out">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span></div>
+      <div><span class="t-success">✓ All critical systems nominal.</span></div>
+      <div><span class="t-prompt">❯ </span><span class="t-cmd" style="animation:blink 1s infinite;">█</span></div>
+    </div>
+  </div>
 
-<div class="code">
-<pre>
-System Status Report
-
-Dad: Present
-Love: Active
-Memories: Preserved
-Hope: Loading...
-Future Adventures: Pending </pre>
-
-</div>
-
-<p class="quote">
-Life changes.
-
-Schedules change.
-
-Circumstances change.
-
-But being a father never changes.
-
-</p>
-
+  <div class="quote-block" style="margin-top:32px;">
+    <p>Life changes. Schedules change. Circumstances change.<br>
+    But being a father? That never changes.</p>
+  </div>
 </section>
 
+<!-- FINAL -->
 <section>
+  <div class="section-label">// build_complete ✓</div>
 
-<div class="build-complete">
-BUILD COMPLETE ❤️
-</div>
+  <div class="heartbeat-wrap">
+    <svg viewBox="0 0 700 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polyline
+        points="0,40 80,40 110,10 130,70 150,5 170,75 190,40 260,40 290,40 320,40 350,40 380,40 700,40"
+        stroke="#58a6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        fill="none"/>
+    </svg>
+  </div>
 
-<p class="quote">
-You are loved.<br>
-You are remembered.<br>
-You matter.<br><br>
+  <div class="final-glow">BUILD COMPLETE ❤️</div>
 
-Happy Father's Day, Ram.
+  <div class="love-note">
+    <strong>You are loved.</strong><br>
+    You are remembered.<br>
+    You matter more than any commit ever could.<br><br>
+    <strong>Happy Father's Day, Ram.</strong>
+  </div>
 
-</p>
-
-<p class="small">
-Made with ❤️, memories, and a little bit of code.
-</p>
-
+  <p class="made-with">// made with ❤️, memories, and a little bit of code</p>
 </section>
+
+<style>
+@keyframes blink{50%{opacity:0;}}
+</style>
 
 <script>
-
-/* Typing effect */
-
-const titleText = "Happy Father's Day, Ram ❤️";
-const titleElement = document.getElementById("typingTitle");
-
-let i = 0;
-
-function typeTitle(){
-
-    if(i < titleText.length){
-
-        titleElement.innerHTML += titleText.charAt(i);
-        i++;
-
-        setTimeout(typeTitle, 90);
-    }
+/* Stars */
+const starsEl = document.getElementById('stars');
+for(let i=0;i<120;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  const size=Math.random()*2.5+0.5;
+  s.style.cssText=`
+    width:${size}px;height:${size}px;
+    left:${Math.random()*100}%;top:${Math.random()*100}%;
+    --d:${2+Math.random()*5}s;
+    --delay:${Math.random()*6}s;
+    --op:${0.3+Math.random()*0.7};
+  `;
+  starsEl.appendChild(s);
 }
 
-typeTitle();
+/* Particles */
+const partEl=document.getElementById('particles');
+for(let i=0;i<25;i++){
+  const p=document.createElement('div');
+  p.className='particle';
+  const size=Math.random()*4+1;
+  p.style.cssText=`
+    width:${size}px;height:${size}px;
+    left:${Math.random()*100}%;
+    bottom:${-size}px;
+    --dur:${6+Math.random()*10}s;
+    --delay:${Math.random()*10}s;
+  `;
+  partEl.appendChild(p);
+}
 
-/* Reveal sections */
+/* Typing effect */
+const title="Happy Father's Day, Ram ❤️";
+const el=document.getElementById('typingTitle');
+let i=0;
+function type(){
+  if(i<title.length){
+    el.textContent+=title[i++];
+    setTimeout(type,80);
+  }
+}
+type();
 
-const observer = new IntersectionObserver(entries => {
+/* Scroll reveal */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('visible');
+  });
+},{threshold:0.12});
+document.querySelectorAll('section').forEach(s=>observer.observe(s));
 
-    entries.forEach(entry => {
+/* Compilation popup */
+const popup=document.getElementById('compile-popup');
+const pctEl=document.getElementById('popup-pct');
+const labelEl=document.getElementById('popup-label');
+const barEl=document.getElementById('popup-bar');
+const iconEl=popup.querySelector('.popup-icon');
+const titleEl=popup.querySelector('.popup-title');
 
-        if(entry.isIntersecting){
+function updateCompile(){
+  const scrollTop=window.scrollY;
+  const docH=document.documentElement.scrollHeight-window.innerHeight;
+  const pct=Math.min(100,Math.round((scrollTop/docH)*100));
 
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-        }
+  pctEl.textContent=pct+'%';
+  labelEl.textContent='Compilation '+pct+'% complete';
+  barEl.style.width=pct+'%';
 
-    });
-
-},{threshold:0.15});
-
-document.querySelectorAll("section").forEach(section => {
-    observer.observe(section);
-});
-
-/* Dynamic compilation progress */
-
-const hint = document.getElementById("scrollHint");
-
-window.addEventListener("scroll", () => {
-
-    const scrollTop = window.scrollY;
-
-    const docHeight =
-        document.documentElement.scrollHeight -
-        window.innerHeight;
-
-    const progress =
-        Math.min(
-            100,
-            Math.round((scrollTop / docHeight) * 100)
-        );
-
-    hint.innerHTML =
-        "Compilation " + progress + "% complete ↓";
-
-    if(progress >= 98){
-
-        hint.classList.add("hide");
-
-    }else{
-
-        hint.classList.remove("hide");
-
+  if(pct>=98){
+    popup.classList.add('hide');
+  } else {
+    popup.classList.remove('hide');
+    /* color shift as progress increases */
+    if(pct>70){
+      iconEl.style.background='#3fb950';
+      iconEl.style.boxShadow='0 0 8px #3fb950';
+      titleEl.textContent='ALMOST DONE...';
+    } else if(pct>40){
+      iconEl.style.background='#f0883e';
+      iconEl.style.boxShadow='0 0 8px #f0883e';
+      titleEl.textContent='COMPILING...';
+    } else {
+      iconEl.style.background='var(--blue)';
+      iconEl.style.boxShadow='0 0 8px var(--blue)';
+      titleEl.textContent='COMPILING...';
     }
+  }
+}
 
-});
-
+window.addEventListener('scroll',updateCompile,{passive:true});
+updateCompile();
 </script>
-
 </body>
 </html>
